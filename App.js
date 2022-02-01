@@ -1,25 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native';
 import react from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Article from './components/Article';
+import SearchScreen from './screens/SearchScreen';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
 
+const Stack = createNativeStackNavigator();
 
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.ArticleWraper} >
-        <Text style={styles.sectionTitle}>Guelph Paramedic Integrated Health App</Text>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{headerShown: false}} name="Home" component={HomeScreen} />
+        <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
 
-        {/* this is an example of search results */}
-        <View style={styles.items}>
-        <Article Text={'article 1'}/> {/*prop is going to be article title, on click change page to view that articles page*/}
-        <Article Text={'article 2'}/>
-        <Article Text={'article 3'}/>
-        <Article Text={'article 4'}/>
-        <Article Text={'article 5'}/>
-        </View>
-      </View>
-    </View>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
