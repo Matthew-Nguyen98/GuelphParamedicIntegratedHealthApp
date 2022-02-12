@@ -1,15 +1,12 @@
 import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Logo from '../assets/Logo.png';
 
 const LoginScreen = ({navigation}) => {
   return (
     <SafeAreaView style={ styles.container}>
-      <Image
-      source={{
-        uri: 'http://guelph.ca/wp-content/uploads/GWParamedicsLogo-e1493822602747.png'
-      }}
-      />
+      <Image source={Logo} style ={styles.image} resizeMode="contain"/>
       <Text style={ styles.title}>Log In:</Text>
       <TextInput
         style={styles.input}
@@ -54,7 +51,7 @@ input: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '40%',
+    marginTop: '10%',
   },
   button:{
     alignItems: 'center',
@@ -64,6 +61,13 @@ input: {
     borderRadius: 4,
     elevation: 3,
     backgroundColor: 'white',
-  } 
+  },
+  image:{
+    width:'70%',
+    height:'50%',
+    maxWidth: 300,
+    maxHeight: 200,
+    marginTop: '5%',
+  }
 
 });
