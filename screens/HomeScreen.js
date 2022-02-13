@@ -1,35 +1,35 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ButtonGroup, withTheme } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-const HomeScreen = () => {
+
+const HomeScreen = ({navigation}) => {
 
   return (
-    <SafeAreaView>
-      <Text style={ styles.title}>HomeScreen</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Search for an article"
+
+    
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Contact')}
+        title="Search db"
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  container:{
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+},
     title: {
         fontSize: 30,
         textAlign: "center",
         marginTop: 30,
         paddingVertical: 8,
     },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-      },
-
 });
