@@ -28,10 +28,10 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer Style={styles.container}>
         <Stack.Navigator>
     <Stack.Screen name="Login" component={LoginScreen}/>
-    <Stack.Screen name="Home" component={SideNav} options={{ headerShown: false }} />
+    <Stack.Screen name="SideNav" component={SideNav} options={{ headerShown: false }} />
   </Stack.Navigator>
   </NavigationContainer>
   );
@@ -41,10 +41,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  ArticleWraper:{
-    paddingTop: 80,
-    paddingHorizontal: 20,
   },
   sectionTitle: {
     fontSize:24,

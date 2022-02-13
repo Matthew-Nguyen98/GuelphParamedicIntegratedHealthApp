@@ -1,4 +1,3 @@
-import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ContactScreen  from '../screens/ContactScreen';
 import ResourceScreen from '../screens/ResourceScreen';

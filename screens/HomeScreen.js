@@ -32,17 +32,4 @@ const styles = StyleSheet.create({
         marginTop: 30,
         paddingVertical: 8,
     },
-    nav:{
-      display: 'flex',
-      justifyContent: 'space-evenly',
-      marginTop: '50%',
-      alignItems: 'center',
-    },
-    button:{
-      justifyContent: 'space-between',
-      backgroundColor: 'transparent',
-      fontSize: 20,
-      margin: 10,
-      width: 200,
-    }
 });
