@@ -23,13 +23,6 @@ const LoginScreen = ({navigation}) => {
       <CustomInput placeholder="Username" value={username} setValue={setUsername}/>
       <CustomInput placeholder="Password" value={password} setValue={setPassword} secureEntry={true}/>
       <CustomButton text="LOG IN" onPress={onSignInPressed}/>
-       {/* <Button
-                title="Log In"
-                buttonStyle={styles.button}
-                type="outline"
-                titleStyle={{ color: 'rgba(78, 116, 289, 1)' }}              
-        onPress={() => navigation.navigate('Home')}
-      /> */}
          
     </View>
   );
