@@ -1,24 +1,37 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-import CustomInput from '../components/CustomInput';
+
+import React from 'react';
+
+import Axios from 'axios';
+
+import {useEffect, useState} from 'react';
+
+import { settings } from '../config/config';
+
 
 
 const ContactScreen = () => {
-  
-const [keyword, setKeyword] = useState('');
-  return (
-    <View style= {styles.container}>
-            <CustomInput placeholder="Search for a Contact" value={keyword} setValue={setKeyword} secureEntry={false}/>
-    </View>
-  );
-};
+
+  useEffect(() => {
+
+    Axios.get(settings.baseAPI+"contacts").then((response) => {
+
+     console.log(response.data);
+
+    });
+
+   },
+
+   []);
+
+   return (
+
+   <div className='ContactScreen'> </div>)
+
+  }
 
 export default ContactScreen;
 
-const styles = StyleSheet.create({
-  container:{
-    display: 'flex',
-    alignItems: 'center',
 
-  },
-});
+
+const styles = StyleSheet.create({});
