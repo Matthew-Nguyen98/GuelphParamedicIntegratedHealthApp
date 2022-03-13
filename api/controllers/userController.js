@@ -1,6 +1,7 @@
 'use strict';
 
 const userData = require('../data/users');
+const crypto = require('crypto');
 
 const getUserLogin = async (req,res,next) =>{
     try {
@@ -16,12 +17,25 @@ const getUserLogin = async (req,res,next) =>{
         else{
             //email & pwd provided
             //hash input pwd and put in qry for compare
-            var crypto = require('crypto');
             var hash = crypto.createHash('sha256');
-            var inputPwd = hash.password;
+            var inputPwd = hash.update(password).digest('hex');
         }
+        //qry for user with hashed pwd
         const user = await userData.getUserLogin(emailAddress,inputPwd);
-        res.send(user);
+        //
+        if (user.length != 0){
+            res.json({
+                status: "SUCCESS",
+                user
+            })
+        }
+        else{
+            res.json({
+                status: "FAILED",
+                message: "Invalid credentials, try again"
+            })
+        }
+        //res.send(user);
     } catch (error) {
         res.send(error.message);
     }
