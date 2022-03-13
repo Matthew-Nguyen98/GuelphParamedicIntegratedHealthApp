@@ -1,0 +1,11 @@
+SELECT [contactID]
+      ,[firstName]
+      ,[lastName]
+      ,[emailAddress]
+      ,[position]
+      ,[contactLocation]
+      ,[officePhone]
+      ,[mobilePhone]
+      ,[categoryID]
+  FROM [cpapp].[GWParamedic].[Contacts]
+WHERE [contactID] = @contactId
