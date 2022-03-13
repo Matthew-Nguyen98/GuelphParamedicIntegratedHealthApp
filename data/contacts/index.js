@@ -17,6 +17,20 @@ const getContacts = async() =>{
     }
 }
 
+const getContactDetail = async(contactId) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const qry = await utils.loadSqlQries('contacts');
+        const contactDetail = await pool.request()
+                                .input('contactId', sql.Int, contactId)
+                                .query(qry.contactdetail);
+        return contactDetail.recordset;
+
+    } catch (error) {
+        return error.message;
+    }
+}
 module.exports = {
-    getContacts
+    getContacts,
+    getContactDetail
 }

@@ -11,11 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "fs-extra": "^10.0.1",
-    "mssql": "^8.0.2"
+    "mssql": "^8.0.2",
+    "sequelize": "^6.17.0",
+    "tedious": "^14.3.0"
   }
 }
