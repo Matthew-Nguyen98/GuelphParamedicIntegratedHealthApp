@@ -3,10 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const userControler = require('../controllers/userController');
-const sql = require('mssql');
-const config = require('../config');
-const utils = require('../data/utils');
-var assert = require('assert');
+
+//var assert = require('assert');
 
 const {getUserLogin} = userControler;
 const {updateUserPwd} = userControler;

@@ -1,8 +1,11 @@
 'use strict';
 
+require('dotenv').config();
 const utils = require('../utils');
 const config = require ('../../config');
 const sql = require('mssql');
+const nodemailer = require('nodemailer');
+
 
 const getUserLogin = async(emailAddress,inputPwd) => {
     try {
