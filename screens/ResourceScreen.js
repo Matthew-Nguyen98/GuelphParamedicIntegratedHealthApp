@@ -7,7 +7,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 
 const Item = ({ firstName, lastName, emailAddress, officePhone, mobilePhone, position  }) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{firstName} {lastName} <a href="mailto:{emailAddress}">{emailAddress}</a> <a href="tel:{officePhone}"> {officePhone}</a> {position}</Text>
+    <Text style={styles.title}>{firstName} {lastName} <a href={"mailto:" + emailAddress}>{emailAddress}</a> <a href={"tel:" + officePhone}> {officePhone}</a> {position}</Text>
   </View>
 );
 

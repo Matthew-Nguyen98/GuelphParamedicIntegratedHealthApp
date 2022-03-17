@@ -8,4 +8,3 @@ SELECT [userID]
       ,[isResetingPwd]
   FROM [GWParamedic].[Users]
 WHERE [emailAddress] = @emailAddress
-AND [passwordHashed] = @inputPwd
