@@ -11,6 +11,7 @@ import AssessmentScreen from './screens/Assessment';
 import MedicalDirectiveScreen from './screens/MedicalDirective';
 import FormsScreen from './screens/Forms';
 import SideNav from './Routes/SideNav';
+import Reset from './Routes/Reset'
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -29,9 +30,10 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer Style={styles.container}>
-        <Stack.Navigator>
+    <Stack.Navigator>
     <Stack.Screen name="Login" component={LoginScreen}/>
     <Stack.Screen name="SideNav" component={SideNav} options={{ headerShown: false }} />
+    <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false }} />
   </Stack.Navigator>
   </NavigationContainer>
   );

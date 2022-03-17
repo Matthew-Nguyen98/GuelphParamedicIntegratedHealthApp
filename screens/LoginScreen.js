@@ -4,25 +4,58 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../assets/Logo.png';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
+import { settings } from '../config/config';
+import axios from 'axios';
+
+
+
 
 const LoginScreen = ({navigation}) => {
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const onSignInPressed = () =>{
-    var test = true
-    if(test){ //this is where validation of username and password
-      navigation.navigate('SideNav')
-    }
-    
+  const onSignInPressed = (emailAddress,password ) =>{
+    const url=settings.baseAPI+"login";
+    const values = {emailAddress,password};
+    console.log(url);
+    console.log(values);
+    axios.post(url,values)
+         .then((response)=>{
+             const result = response.data;
+             console.log(result);
+             const {status,message,user} = result;
+             //success case
+             if (status !== 'SUCCESS'){
+                 //handleMessage(message,status);
+              console.log("login failed but api called");
+              console.log(status);
+             }
+             else{
+                 navigation.navigate('SideNav');
+                 console.log("success");
+             }
+     //        setSubmitting(false);
+         })
+         .catch(error =>{
+  
+        //setSubmitting(false);
+        //handleMessage("Error occured. Try again later");
+  
+    })
+  
   }
+
+
+  const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <View style={ styles.container}>
       <Image source={Logo} style ={styles.image} resizeMode="contain"/>
-      <CustomInput placeholder="Username" value={username} setValue={setUsername}/>
+      <CustomInput placeholder="Username" value={emailAddress} setValue={setEmailAddress}/>
       <CustomInput placeholder="Password" value={password} setValue={setPassword} secureEntry={true}/>
-      <CustomButton text="LOG IN" onPress={onSignInPressed}/>
+      <CustomButton text="LOG IN"  onPress={() =>{
+         onSignInPressed(emailAddress,password);
+        }}/>
+              <CustomButton style={styles.reset} text="reset Password" onPress={() =>{navigation.navigate('Reset');}}/>
        {/* <Button
                 title="Log In"
                 buttonStyle={styles.button}
