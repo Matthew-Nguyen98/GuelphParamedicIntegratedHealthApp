@@ -25,7 +25,6 @@ const LoginScreen = ({navigation}) => {
              //success case
              if (status !== 'SUCCESS'){
                  //handleMessage(message,status);
-              console.log("login failed but api called");
               console.log(status);
              }
              else{

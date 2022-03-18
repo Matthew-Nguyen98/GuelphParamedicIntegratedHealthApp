@@ -30,16 +30,14 @@ const Reset = () => {
                      navigation.navigate('Login');
                      console.log("PasswordReset");
                  }
-         //        setSubmitting(false);
+         //setSubmitting(false);
              })
              .catch(error =>{
       
             //setSubmitting(false);
             //handleMessage("Error occured. Try again later");
-      
-        })
-
-      }
+          })
+}
 
 return(
 <View style={ styles.container}>
@@ -48,12 +46,10 @@ return(
 placeholder={"Enter your Email Address"}
 value={emailAddress} setValue={setEmailAddress} />
 <CustomButton
-text="Reset Password"  onPress={onResetPressed(emailAddress)}/>
+text="Reset Password"  onPress={()=>{onResetPressed(emailAddress)}}/>
 </View>
 )
-
 }
-
 
 export default Reset;
 
