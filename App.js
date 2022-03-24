@@ -1,41 +1,47 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
-import react from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import react, { useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import ContactScreen  from './screens/ContactScreen';
-import ResourceScreen from './screens/ResourceScreen';
-import AssessmentScreen from './screens/Assessment';
-import MedicalDirectiveScreen from './screens/MedicalDirective';
-import FormsScreen from './screens/Forms';
-import SideNav from './Routes/SideNav';
-import Reset from './Routes/Reset'
+import { CredentialsContext } from './components/CredentialsContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RootStack from './Routes/RootStack';
+import AppLoading from 'expo-app-loading';
 
-const Stack = createNativeStackNavigator();
+
+
 const Drawer = createDrawerNavigator();
-// function Root() {
-//   return (
-//     <Drawer.Navigator>
-//       <Drawer.Screen name="Home" component={HomeScreen} />
-//       <Drawer.Screen name="Contact" component={ContactScreen} />
-//       <Drawer.Screen name="Resources" component={ResourceScreen} />
-//       <Drawer.Screen name="Assessments" component={AssessmentScreen} />
-//       <Drawer.Screen name="Forms" component={FormsScreen} />
-//     </Drawer.Navigator>
-//   );
-// }
 
 export default function App() {
+
+const [appReady, setAppReady] = useState(false);
+const [storedCredentials, setStoredCredentials] = useState('');
+
+const checkLoginCredentials = () => {
+  AsyncStorage
+  .getItem('loginCredentials')
+  .then((result) => {
+    if(result !== null){
+      setStoredCredentials(JSON.parse(result));
+    }
+    else{
+      setStoredCredentials(null);
+    }
+  })
+  .catch(error => console.log(error))
+}
+
+if(!appReady){
+  return(
+    <AppLoading
+    startAsync={checkLoginCredentials}
+    onFinish={() => setAppReady(true)}
+    onError={console.warn}
+    />
+  )
+}
   return (
-    <NavigationContainer Style={styles.container}>
-    <Stack.Navigator>
-    <Stack.Screen name="Login" component={LoginScreen}/>
-    <Stack.Screen name="SideNav" component={SideNav} options={{ headerShown: false }} />
-    <Stack.Screen name="Reset" component={Reset} options={{ headerShown: false }} />
-  </Stack.Navigator>
-  </NavigationContainer>
+  <CredentialsContext.Provider value={{storedCredentials, setStoredCredentials}}>
+  <RootStack/>
+  </CredentialsContext.Provider>
   );
 }
 

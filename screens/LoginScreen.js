@@ -1,16 +1,24 @@
 import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../assets/Logo.png';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import { settings } from '../config/config';
 import axios from 'axios';
+import SideNav from '../Routes/SideNav';
+import Reset from './Reset';
+import { CredentialsContext } from '../components/CredentialsContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 
 const LoginScreen = ({navigation}) => {
+
+const {storedCredentials, setStoredCredentials} = useContext(CredentialsContext);
+const [emailAddress, setEmailAddress] = useState('');
+const [password, setPassword] = useState('');
 
   const onSignInPressed = (emailAddress,password ) =>{
     const url=settings.baseAPI+"login";
@@ -20,22 +28,29 @@ const LoginScreen = ({navigation}) => {
     axios.post(url,values)
          .then((response)=>{
              const result = response.data;
+             //add validation to make sure user[0] exists
+             if(result != null)
+             {
+               if(result.user.length > 0)
+               {
+                 console.log("got here" + result.user[0].emailAddress);
+               }
+             }
+             console.log("user:" + result.user[0].emailAddress);
              console.log(result);
              const {status,message,user} = result;
              //success case
              if (status !== 'SUCCESS'){
                  //handleMessage(message,status);
-              console.log("login failed but api called");
               console.log(status);
              }
              else{
-                 navigation.navigate('SideNav');
+                 persistLogin(response.data, message, status)
                  console.log("success");
              }
      //        setSubmitting(false);
          })
          .catch(error =>{
-  
         //setSubmitting(false);
         //handleMessage("Error occured. Try again later");
   
@@ -43,9 +58,17 @@ const LoginScreen = ({navigation}) => {
   
   }
 
-
-  const [emailAddress, setEmailAddress] = useState('');
-  const [password, setPassword] = useState('');
+  const persistLogin = (credentials, message, status) => {
+    AsyncStorage.setItem('loginCredentials', JSON.stringify(credentials))
+    .then(() =>{
+      // handleMessage(message, status);
+      setStoredCredentials(credentials)
+    })
+    .catch((error) => {
+      console.log(error);
+      // handleMessage('persisting login failed');
+    })
+  }
 
   return (
     <View style={ styles.container}>

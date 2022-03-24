@@ -145,7 +145,7 @@ const resetUserPwd = async (req,res,next) =>{
                     })
                     const mailOptions = {
                         from: process.env.AUTH_EMAIL,
-                        to: 'luongmga@gmail.com',
+                        to: emailAddress,
                         subject: 'Testing',
                         text: 'Temp pwd is ' + newRandomedPwd
                     }

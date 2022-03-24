@@ -5,6 +5,7 @@ import AssessmentScreen from '../screens/Assessment';
 import MedicalDirectiveScreen from '../screens/MedicalDirective';
 import FormsScreen from '../screens/Forms';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import AccountScreen from '../screens/AccountScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,6 +18,7 @@ const SideNav = () => {
 <Drawer.Screen name="Assessments" component={AssessmentScreen} />
 <Drawer.Screen name="MedicalDirective" component={MedicalDirectiveScreen} />
 <Drawer.Screen name="Forms" component={FormsScreen} />
+<Drawer.Screen name="Account" component={AccountScreen} />
 </Drawer.Navigator>
     );
 }
