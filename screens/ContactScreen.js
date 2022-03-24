@@ -30,15 +30,16 @@ const ContactScreen = () => {
       });
     },[]);
 
-  const renderItem = ({ item }) => (
-    <Item
-     firstName={item.firstName}
-     lastName={item.lastName}
-     emailAddress={item.emailAddress}
-     officePhone={item.officePhone}
-     position={item.position}
-     />
-  );
+ 
+    const renderItem = ({ item }) => (
+      <Item style={styles.item}
+       firstName={item.firstName}
+       lastName={item.lastName} 
+       emailAddress={item.emailAddress+"\n"}
+       officePhone={item.officePhone+"\n"}
+       position={item.position}
+       />
+    );
 
   return (
     <View style={styles.container}>
@@ -66,6 +67,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     maxWidth: 350,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderColor: 'black',
   },
   title: {
     fontSize: 32,

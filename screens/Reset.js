@@ -19,7 +19,7 @@ const Reset = () => {
              .then((response)=>{
                  const result = response.data;
                  console.log(result);
-                 const {status,message,user} = result;
+                 const {status,message} = result;
                  //success case
                  if (status !== 'EMAILED'){
                      //handleMessage(message,status);

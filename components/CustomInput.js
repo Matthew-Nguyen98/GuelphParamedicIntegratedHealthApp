@@ -1,7 +1,7 @@
 import react from "react";
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 
-const CustomInput = ({value, setValue, placeholder, secureEntry}) => {
+const CustomInput = ({value, setValue, placeholder, secureEntry, editable}) => {
    return(<View style= {styles.container}>
        <TextInput
         value={value}
@@ -9,6 +9,7 @@ const CustomInput = ({value, setValue, placeholder, secureEntry}) => {
         placeholder={placeholder}
         secureTextEntry={secureEntry}
         style={styles.input}
+        editable={editable}
        />
    </View>
    ); 
