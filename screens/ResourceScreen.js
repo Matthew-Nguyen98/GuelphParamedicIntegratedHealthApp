@@ -3,11 +3,15 @@ import Axios from 'axios';
 import {useEffect, useState} from 'react';
 import { settings } from '../config/config';
 import CustomInput from '../components/CustomInput';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Button } from 'react-native';
+import { openComposer } from "react-native-email-link";
+import { Linking } from 'react-native';
 
 const Item = ({ firstName, lastName, emailAddress, officePhone, mobilePhone, position  }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{firstName} {lastName} <a href={"mailto:" + emailAddress}>{emailAddress}</a> <a href={"tel:" + officePhone}> {officePhone}</a> {position}</Text>
+  <View style={styles.item}>             
+    <Text style={styles.title}>{firstName} {lastName} {position} </Text>
+    <Button onPress={() =>  Linking.openURL('mailto:'+emailAddress)} title={emailAddress}></Button>
+    <Button onPress={() =>  Linking.openURL('tel:'+officePhone)} title={officePhone}></Button>
   </View>
 );
 
@@ -34,10 +38,12 @@ const ResourceScreen = () => {
       <Item style={styles.item}
        firstName={item.firstName}
        lastName={item.lastName} 
-       emailAddress={item.emailAddress+"\n"}
-       officePhone={item.officePhone+"\n"}
-       position={item.position}
+       emailAddress={item.emailAddress}
+       officePhone={item.officePhone}
+       position={item.position} 
        />
+
+       
     );
 
   return (
@@ -73,10 +79,11 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-    maxWidth: 350,
+    // maxWidth: 350,
     borderStyle: 'solid',
     borderWidth: 2,
     borderColor: 'black',
+    borderRadius: 8,
   },
   title: {
     fontSize: 32,

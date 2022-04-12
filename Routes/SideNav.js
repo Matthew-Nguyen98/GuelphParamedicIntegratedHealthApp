@@ -1,5 +1,6 @@
 import HomeScreen from '../screens/HomeScreen';
-import ContactScreen  from '../screens/ContactScreen';
+import ContactRoutes from './ContactRoutes';
+import ContactScreen from '../screens/ContactScreen';
 import ResourceScreen from '../screens/ResourceScreen';
 import AssessmentScreen from '../screens/Assessment';
 import MedicalDirectiveScreen from '../screens/MedicalDirective';

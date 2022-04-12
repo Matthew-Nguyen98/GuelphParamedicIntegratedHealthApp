@@ -3,24 +3,40 @@ import Axios from 'axios';
 import {useEffect, useState} from 'react';
 import { settings } from '../config/config';
 import CustomInput from '../components/CustomInput';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Button } from 'react-native';
 import { Linking } from 'react-native';
+import CustomButton from '../components/CustomButton';
 
 const Item = ({ firstName, lastName, emailAddress, officePhone, mobilePhone, position  }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{firstName} {lastName} <a href={"mailto:" + emailAddress}>{emailAddress}</a> <a href={"tel:" + officePhone}> {officePhone}</a> {position}</Text>
+  <View style={styles.item}>             
+    <Text style={styles.title}>{firstName} {lastName} {position} </Text>
+    <Button onPress={() =>  Linking.openURL('mailto:'+emailAddress)} title={emailAddress}></Button>
+    <Button onPress={() =>  Linking.openURL('tel:'+officePhone)} title={officePhone}></Button>
   </View>
 );
 
-
-
-const ContactScreen = () => {
+const ContactScreen = ({navigation}) => {
+  const [category, setCategory] = useState('');
   const [contacts, setContacts] = useState([]);
-  useEffect(() => {
+  const [customContacts,setCustomContacts] = useState(contacts);
+
+
+ 
+    const renderItem = ({ item }) => (
+      <Item style={styles.item} 
+       firstName={item.firstName}
+       lastName={item.lastName} 
+       emailAddress={item.emailAddress}
+       officePhone={item.officePhone}
+       position={item.position}
+       />
+    );
+
+    useEffect(() => {
       Axios.get(settings.baseAPI+"contacts")
       .then((response) => {
-        console.log(response.data);
-        const myContacts = response.data;
+        console.log(response.data);       
+        const myContacts = response.data; // replace firstname with category.includes (useState of search)
         setContacts(myContacts);
       })
       .catch((error) => {
@@ -30,21 +46,15 @@ const ContactScreen = () => {
       });
     },[]);
 
- 
-    const renderItem = ({ item }) => (
-      <Item style={styles.item}
-       firstName={item.firstName}
-       lastName={item.lastName} 
-       emailAddress={item.emailAddress+"\n"}
-       officePhone={item.officePhone+"\n"}
-       position={item.position}
-       />
-    );
-
   return (
     <View style={styles.container}>
       <CustomInput
-      placeholder='Search for a Contact'/>
+      placeholder='Search for a Contact'
+      value={category}
+      setValue= {setCategory
+      }
+      />
+      
       <FlatList
         data={contacts}
         renderItem={renderItem}
@@ -70,6 +80,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 2,
     borderColor: 'black',
+    borderRadius: 8,
   },
   title: {
     fontSize: 32,
